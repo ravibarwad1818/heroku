@@ -3,19 +3,9 @@ const app = express();
 require("./db/conn");
 const Student = require("./models/students")
 const mongoose = require("mongoose");
-const port = 5555;
+const port = process.env.PORT || 5555;
+
 app.use(express.json());
-
-//app.post("/students", (req,res) => {
-//    console.log(req.body);
-//    const user = new Student(req.body);
-
-//    user.save().then(() => {
-//        res.status(201).send(user);
-//    }).catch((e) => {
-//        res.status(400).send(e);
-//    })
-//})
 
 app.post("/students", async(req,res) => {
     try{
@@ -36,7 +26,6 @@ app.get("/students", async(req,res) => {
         res.send(e);
     }
 })
-
 
 app.listen(port, ()=> {
     console.log("Connection is setup at " + port );
